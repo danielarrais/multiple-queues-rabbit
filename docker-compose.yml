@@ -7,7 +7,7 @@ services:
         hostname: 'rabbit'
         restart: always
         ports:
-            - "5671:5672"
+            - "5672:5672"
             - "8070:15672"
         environment:
             RABBITMQ_VHOST: /
@@ -28,6 +28,7 @@ services:
             RABBITMQ_ADDRESS: broker
             RABBITMQ_USERNAME: admin
             RABBITMQ_PASSWORD: admin
+            RABBITMQ_PORT: 5672
         depends_on:
             - rabbit
 networks:

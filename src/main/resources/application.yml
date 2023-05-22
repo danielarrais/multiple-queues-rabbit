@@ -1,2 +1,20 @@
 server:
   port: ${SERVER_PORT:8080}
+queues:
+  example1Queue:
+    name: example1Queue
+    tll: 1000
+  example2Queue:
+    name: example2Queue
+    tll: 1000
+
+spring:
+  rabbitmq:
+    ssl:
+      enabled: false
+    host: ${RABBITMQ_ADDRESS:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:admin}
+    password: ${RABBITMQ_PASSWORD:admin}
+    virtualhost: ${RABBITMQ_VHOST:/}
+
