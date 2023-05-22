@@ -1,0 +1,35 @@
+version: "3"
+
+
+services:
+    rabbit:
+        image: rabbitmq:3.8.18-management-alpine
+        hostname: 'rabbit'
+        restart: always
+        ports:
+            - "5671:5672"
+            - "8070:15672"
+        environment:
+            RABBITMQ_VHOST: /
+            RABBITMQ_DEFAULT_USER: admin
+            RABBITMQ_DEFAULT_PASS: admin
+        networks: 
+            - vpc
+    multiple-queues-rabbit:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        networks: 
+            - vpc
+        ports:
+            - "8080:8080"
+        environment:
+            SERVER_PORT: 8080
+            RABBITMQ_ADDRESS: broker
+            RABBITMQ_USERNAME: admin
+            RABBITMQ_PASSWORD: admin
+        depends_on:
+            - rabbit
+networks:
+    vpc:
+        driver: bridge
